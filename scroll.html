@@ -45,16 +45,33 @@
     .align-left{
         float: left;
         margin-right: 10px;
-        transform: translateX(-500px);
+    }
+    .align-left.slide-in{
+         transform: translateX(-500px);
     }
     .align-right{
         float: right;
         margin-left: 10px;
-        transform: translateX(500px);
+    }
+    .align-right.slide-in{
+         transform: translateX(500px);
+    }
+    .visible{
+        transform: translateX(0) !important;
     }
 
 </style>
 <script>
+    window.addEventListener('scroll',scrolling);
+    const images=document.querySelectorAll('img');
     
+    function scrolling (e){
+        const fromTop=window.pageYOffset;
+        images.forEach(image => {
+            const imgBottom=image.getBoundingClientRect().bottom;
+            ((imgBottom + image.height) > fromTop/2 && imgBottom - image.height < fromTop) ?
+                image.classList.add('visible') : image.classList.remove('visible');
+        });
+    }
 </script>
 </html>
