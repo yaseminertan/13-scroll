@@ -74,12 +74,11 @@
 <script>
     window.addEventListener('scroll',scrolling);
     const images=document.querySelectorAll('img');
-    
     function scrolling (e){
-        const fromTop=window.scrollY+window.innerHeight;//window.pageYOffset;
+        const fromTop=window.scrollY;
         images.forEach(image => {
-            const imgBottom=image.getBoundingClientRect().bottom;
-            ((imgBottom + image.height) > fromTop/4 && imgBottom - image.height*2 < fromTop) ?
+            const imgBottom=image.offsetTop; 
+            ( fromTop<imgBottom+image.height && fromTop>imgBottom-image.height) ?
                 image.classList.add('visible') : image.classList.remove('visible');
         });
     }
